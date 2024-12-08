@@ -1,0 +1,5 @@
+<app-header *ngIf="!hideHeader"></app-header>
+<app-cuisines *ngIf="showCuisinesAndRestaurants"></app-cuisines>
+<app-restaurants *ngIf="showCuisinesAndRestaurants"></app-restaurants>
+<router-outlet></router-outlet>
+<app-footer *ngIf="!hideHeader"></app-footer>

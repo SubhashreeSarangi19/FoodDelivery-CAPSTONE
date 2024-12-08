@@ -1,0 +1,83 @@
+<div class="container mx-auto p-8 bg-gray-100 shadow-lg rounded-lg">
+
+  <section class="mb-12">
+    <h3 class="text-2xl font-bold text-orange-600 mb-6">Add a Restaurant</h3>
+    <form [formGroup]="restaurantForm" (ngSubmit)="addRestaurant()" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
+      <!-- Restaurant Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-800">Restaurant Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="input w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+        />
+        <small *ngIf="restaurantSubmitted && restaurantForm.controls['name'].invalid" class="text-red-500 mt-1">
+          Name is required.
+        </small>
+      </div>
+
+      <!-- Restaurant Rating -->
+      <div>
+        <label for="rating" class="block text-sm font-medium text-gray-800">Rating</label>
+        <input
+          id="rating"
+          type="number"
+          formControlName="rating"
+          min="0"
+          max="5"
+          class="input w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+        />
+        <small *ngIf="restaurantSubmitted && restaurantForm.controls['rating'].invalid" class="text-red-500 mt-1">
+          Enter a valid rating (0-5).
+        </small>
+      </div>
+
+      <!-- Restaurant Image -->
+      <div>
+        <label for="imageUrl" class="block text-sm font-medium text-gray-800">Image URL</label>
+        <input
+          id="imageUrl"
+          type="text"
+          formControlName="imageUrl"
+          class="input w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+        />
+        <small *ngIf="restaurantSubmitted && restaurantForm.controls['imageUrl'].invalid" class="text-red-500 mt-1">
+          Image URL is required.
+        </small>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="btn w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded-lg transition-all"
+        >
+          Add Restaurant
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- List of Restaurants -->
+  <section>
+    <h3 class="text-2xl font-bold text-orange-600 mb-6">Restaurants</h3>
+    <ul class="space-y-4">
+      <li
+        *ngFor="let restaurant of restaurants"
+        class="bg-white p-4 rounded-lg shadow-md flex justify-between items-center"
+      >
+        <div>
+          <h4 class="text-lg font-bold">{{ restaurant.name }}</h4>
+          <p class="text-sm text-gray-500">Rating: {{ restaurant.rating }}</p>
+        </div>
+        <button
+          (click)="deleteRestaurant(restaurant.id)"
+          class="btn bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-all"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </section>
+</div>

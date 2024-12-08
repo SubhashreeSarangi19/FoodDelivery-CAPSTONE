@@ -1,0 +1,82 @@
+<div class="menu-container p-8 bg-gradient-to-r from-blue-50 via-gray-50 to-blue-50 min-h-screen">
+  <h2 class="text-5xl font-extrabold mb-12 text-center text-gray-900 tracking-wide">
+    🍴 Our Delicious Menu
+  </h2>
+
+  <div *ngIf="menuItems.length === 0" class="text-center">
+    <p class="text-gray-500 text-lg">No menu items available at the moment. Please check back later!</p>
+  </div>
+
+  <!-- Table for Menu Items -->
+  <table *ngIf="menuItems.length > 0" class="menu-table w-full text-left border-collapse">
+    <thead>
+      <tr class="bg-gray-200 text-gray-700">
+        <th class="px-4 py-2">Image</th>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Description</th>
+        <th class="px-4 py-2">Price</th>
+        <th class="px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Menu Item Row -->
+      <tr *ngFor="let item of menuItems" class="border-b hover:bg-gray-100 transition">
+        <!-- Image -->
+        <td class="px-4 py-3">
+          <img
+            [src]="item.image"
+            [alt]="item.name"
+            class="w-24 h-24 object-cover rounded-lg border border-gray-200"
+          />
+        </td>
+        
+        <!-- Name -->
+        <td class="px-4 py-3">
+          <h3 class="text-lg font-semibold text-gray-800 truncate">
+            {{ item.name }}
+          </h3>
+        </td>
+
+        <!-- Description -->
+        <td class="px-4 py-3">
+          <p class="text-gray-600 text-sm line-clamp-3">
+            {{ item.description }}
+          </p>
+        </td>
+
+        <!-- Price -->
+        <td class="px-4 py-3 text-orange-500 font-bold text-lg">
+          ₹{{ item.price }}
+        </td>
+
+        <!-- Tags -->
+        <!-- <td class="px-4 py-3">
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngIf="item.isSpicy"
+              class="inline-block bg-red-200 text-red-800 px-3 py-1 rounded-full text-xs font-medium"
+            >
+              🌶️ Spicy
+            </span>
+            <span
+              *ngIf="item.isCustomizable"
+              class="inline-block bg-green-200 text-green-800 px-3 py-1 rounded-full text-xs font-medium"
+            >
+              ✨ Customizable
+            </span>
+          </div>
+        </td> -->
+
+        <!-- Add to Cart Button -->
+        <td class="px-4 py-3">
+          <button
+            (click)="addToCart(item)"
+            class="px-4 py-2 bg-orange-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-orange-800"
+          >
+            Add to Cart
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

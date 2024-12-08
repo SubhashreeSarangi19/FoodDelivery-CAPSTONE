@@ -1,0 +1,59 @@
+<div class="flex flex-col gap-4 pt-10 mt-5">
+    <h2 class="text-2xl font-bold text-center pb-4">
+      Restaurants with online food delivery in Bhubaneswar
+    </h2>
+  
+    <!-- Loader -->
+    <div *ngIf="restaurants.length === 0" class="text-center">
+      <p>Loading restaurants, please wait...</p>
+    </div>
+  
+    <!-- Container with grid instead of flex -->
+    <div *ngIf="restaurants.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+      <div *ngFor="let restaurant of restaurants" class="w-full rounded-lg shadow-md">
+        <a [routerLink]="'menu'">
+          <img
+            [src]="restaurant.imageUrl || 'assets/placeholder-image.jpg'"
+            class="rounded-t-lg w-full h-48 object-cover"
+            [alt]="restaurant.name || 'Restaurant Image'"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold text-center">{{ restaurant.name }}</h3>
+  
+          <!-- Rating Section -->
+          <div class="flex items-center justify-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-orange-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371.26.987.887l-3.785 3.786a1 1 0 00-.14 1.26l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-3.785-3.786a1 1 0 00-1.26.14l3.291-1.07a1 1 0 00.69-.95h-3.462a1 1 0 00-.887.988l-3.786 3.78"
+              />
+            </svg>
+            <span class="text-orange-500">{{ restaurant.rating || 'N/A' }}</span>
+          </div>
+  
+          <!-- Wishlist Icon -->
+          <div class="flex items-center justify-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              (click)="restaurant.id !== undefined && toggleWishlist(restaurant.id)"
+              class="h-5 w-5 cursor-pointer"
+              [class.text-red-500]="restaurant.isFavorite"
+              [class.text-gray-400]="!restaurant.isFavorite"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.04 4.5 2.09C13.09 4.04 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

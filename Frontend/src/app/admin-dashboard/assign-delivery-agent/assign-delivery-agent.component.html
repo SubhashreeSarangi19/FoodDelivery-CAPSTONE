@@ -1,0 +1,58 @@
+<div class="container mx-auto p-8 bg-gray-100 shadow-lg rounded-lg">
+    <h3 class="text-2xl font-bold text-orange-600 mb-6">Assign Delivery Agent to Order</h3>
+  
+    <form [formGroup]="assignForm" (ngSubmit)="assignDeliveryAgent()" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
+      <!-- Select Order -->
+      <div>
+        <label for="orderId" class="block text-sm font-medium text-gray-800">Select Order</label>
+        <select
+          id="orderId"
+          formControlName="orderId"
+          class="input w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+        >
+          <option value="" disabled>Select an order</option>
+          <option *ngFor="let order of orders" [value]="order.id">
+            Order #{{ order.id }} - {{ order.customerName }}
+          </option>
+        </select>
+        <small
+          *ngIf="submitted && assignForm.controls['orderId'].invalid"
+          class="text-red-500 mt-1"
+        >
+          Selecting an order is required.
+        </small>
+      </div>
+  
+      <!-- Select Delivery Agent -->
+      <div>
+        <label for="deliveryAgentId" class="block text-sm font-medium text-gray-800">Select Delivery Agent</label>
+        <select
+          id="deliveryAgentId"
+          formControlName="deliveryAgentId"
+          class="input w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+        >
+          <option value="" disabled>Select a delivery agent</option>
+          <option *ngFor="let agent of deliveryAgents" [value]="agent.id">
+            {{ agent.name }} ({{ agent.contact }})
+          </option>
+        </select>
+        <small
+          *ngIf="submitted && assignForm.controls['deliveryAgentId'].invalid"
+          class="text-red-500 mt-1"
+        >
+          Selecting a delivery agent is required.
+        </small>
+      </div>
+  
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="btn w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded-lg transition-all"
+        >
+          Assign Delivery Agent
+        </button>
+      </div>
+    </form>
+  </div>
+  
